@@ -1,15 +1,10 @@
-﻿using System;
+using System;
 using NKH.MindSqualls.MotorControl;
 using SortAlgoBot.Helpers;
 
 namespace SortAlgoBot.Commands
 {
-    public interface IRobotCommand
-    {
-        void Execute(McNxtBrick brick, SortRail sortRail, BallPosition position);
-    }
-
-    public class RobotToPosition : IRobotCommand
+    public class RobotToPositionCommand : IRobotCommand
     {
         #region IRobotCommand Members
 
@@ -23,9 +18,11 @@ namespace SortAlgoBot.Commands
                 motorDirection = MotorDirection.Backward;
             }
 
+            var absTacho = (uint) Math.Abs(tacho);
+
             int resultTacho = MotorHelper.RunAndWait(
-                brick,
-                (uint) Math.Abs(tacho),
+                (McNxtMotor) brick.MotorA,
+                absTacho,
                 motorDirection);
 
             sortRail.CurrentTacho += resultTacho;

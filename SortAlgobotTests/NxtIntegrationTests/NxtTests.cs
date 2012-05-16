@@ -10,87 +10,121 @@ namespace SortAlgobotTests.NxtIntegrationTests
     [TestClass]
     public class NxtTests
     {
+        private McNxtBrick _brick;
+
+        [TestInitialize]
+        public void InitRobot()
+        {
+            _brick = new McNxtBrick(NxtCommLinkType.USB, 0)
+            {
+                MotorA = new McNxtMotor(),
+                MotorB = new McNxtMotor(),
+                MotorC = new McNxtMotor(),
+                //Sensor3 = new Nxt2ColorSensor()
+            };
+
+            _brick.Connect();
+            _brick.CommLink.KeepAlive();
+
+            if (!_brick.IsMotorControlRunning())
+                _brick.StartMotorControl();
+        }
+
+        [TestCleanup]
+        public void CleanupRobot()
+        {
+            if (_brick.IsMotorControlRunning())
+                _brick.StopMotorControl();
+
+            Thread.Sleep(1000);
+            _brick.Disconnect();
+        }
+
+        [TestMethod]
+        public void ShouldDeliverBallOnPositionSix()
+        {
+            var sortRail = new SortRail();
+
+            var c1 = new RobotToPositionCommand();
+            c1.Execute(_brick, sortRail, BallPosition.Six);
+
+            var command = new RobotLiftBallCommand();
+            command.Execute(_brick, null, BallPosition.Home);
+
+            var c2 = new RobotToPositionCommand();
+            c2.Execute(_brick, sortRail, BallPosition.Home);
+        }
+
+        [TestMethod]
+        public void ShouldLiftBallAndFallBack()
+        {
+            var command = new RobotLiftBallCommand();
+            command.Execute(_brick, null, BallPosition.Home);
+        }
+
+        [TestMethod]
+        public void ShouldDropBallAndTurnBack()
+        {
+            var command = new RobotDropBallCommand();
+            command.Execute(_brick, null, BallPosition.Home);
+        }
+
         [TestMethod]
         public void ShouldMoveTheRobotForwardToPos8AndBackHome()
         {
-            var brick = new McNxtBrick(NxtCommLinkType.USB, 0);
-            brick.Connect();
-            brick.CommLink.KeepAlive();
-            brick.MotorA = new McNxtMotor();
             var sortRail = new SortRail();
 
-            if (!brick.IsMotorControlRunning())
-                brick.StartMotorControl();
+            var commandEight = new RobotToPositionCommand();
+            commandEight.Execute(_brick, sortRail, BallPosition.Eight);
 
-            var commandEight = new RobotToPosition();
-            commandEight.Execute(brick, sortRail, BallPosition.Eight);
-
-            var commandBack = new RobotToPosition();
-            commandBack.Execute(brick, sortRail, BallPosition.Home);
-
-            if (brick.IsMotorControlRunning())
-                brick.StopMotorControl();
-
-            Thread.Sleep(1000);
-            brick.Disconnect();
+            var commandBack = new RobotToPositionCommand();
+            commandBack.Execute(_brick, sortRail, BallPosition.Home);
         }
 
         [TestMethod]
         public void ShouldMoveTheRobotForwardToPos3And6AndBack1()
         {
-            var brick = new McNxtBrick(NxtCommLinkType.USB, 0);
-            brick.Connect();
-            brick.CommLink.KeepAlive();
-            brick.MotorA = new McNxtMotor();
             var sortRail = new SortRail();
 
-            if (!brick.IsMotorControlRunning())
-                brick.StartMotorControl();
+            var command1 = new RobotToPositionCommand();
+            command1.Execute(_brick, sortRail, BallPosition.Two);
 
-            var command1 = new RobotToPosition();
-            command1.Execute(brick, sortRail, BallPosition.Two);
+            var command2 = new RobotToPositionCommand();
+            command2.Execute(_brick, sortRail, BallPosition.One);
 
-            var command2 = new RobotToPosition();
-            command2.Execute(brick, sortRail, BallPosition.One);
+            var command3 = new RobotToPositionCommand();
+            command3.Execute(_brick, sortRail, BallPosition.Three);
 
-            var command3 = new RobotToPosition();
-            command3.Execute(brick, sortRail, BallPosition.Three);
+            var c4 = new RobotToPositionCommand();
+            c4.Execute(_brick, sortRail, BallPosition.Seven);
 
-            var c4 = new RobotToPosition();
-            c4.Execute(brick, sortRail, BallPosition.Seven);
+            var c5 = new RobotToPositionCommand();
+            c5.Execute(_brick, sortRail, BallPosition.Nine);
 
-            var c5 = new RobotToPosition();
-            c5.Execute(brick, sortRail, BallPosition.Nine);
+            var c6 = new RobotToPositionCommand();
+            c6.Execute(_brick, sortRail, BallPosition.Eight);
 
-            var c6 = new RobotToPosition();
-            c6.Execute(brick, sortRail, BallPosition.Eight);
+            var c7 = new RobotToPositionCommand();
+            c7.Execute(_brick, sortRail, BallPosition.Twelve);
 
-            var c7 = new RobotToPosition();
-            c7.Execute(brick, sortRail, BallPosition.Twelve);
+            var c8 = new RobotToPositionCommand();
+            c8.Execute(_brick, sortRail, BallPosition.Ten);
 
-            var c8 = new RobotToPosition();
-            c8.Execute(brick, sortRail, BallPosition.Ten);
+            var c9 = new RobotToPositionCommand();
+            c9.Execute(_brick, sortRail, BallPosition.Eleven);
 
-            var c9 = new RobotToPosition();
-            c9.Execute(brick, sortRail, BallPosition.Eleven);
+            var c13 = new RobotToPositionCommand();
+            c13.Execute(_brick, sortRail, BallPosition.Four);
 
-            var c13 = new RobotToPosition();
-            c13.Execute(brick, sortRail, BallPosition.Four);
+            var c10 = new RobotToPositionCommand();
+            c10.Execute(_brick, sortRail, BallPosition.Six);
 
-            var c10 = new RobotToPosition();
-            c10.Execute(brick, sortRail, BallPosition.Six);
+            var c11 = new RobotToPositionCommand();
+            c11.Execute(_brick, sortRail, BallPosition.Five);
 
-            var c11 = new RobotToPosition();
-            c11.Execute(brick, sortRail, BallPosition.Five);
+            var c12 = new RobotToPositionCommand();
+            c12.Execute(_brick, sortRail, BallPosition.Home);
 
-            var c12 = new RobotToPosition();
-            c12.Execute(brick, sortRail, BallPosition.Home);
-
-            if (brick.IsMotorControlRunning())
-                brick.StopMotorControl();
-
-            Thread.Sleep(1000);
-            brick.Disconnect();
         }
     }
 }

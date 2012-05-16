@@ -14,18 +14,18 @@ namespace SortAlgoBot.Helpers
     {
         private const int WaitMultiplier = 6;
 
-        public static int RunAndWait(McNxtBrick brick, uint tacho,
+        public static int RunAndWait(McNxtMotor motor, uint tacho,
                                      MotorDirection direction)
         {
             sbyte speed = GetSpeed(direction);
 
-            brick.MotorA.Run(speed, tacho);
+            motor.Run(speed, tacho);
             Thread.Sleep((int) (tacho*WaitMultiplier));
 
-            brick.MotorA.Poll();
-            Debug.WriteLine("OnPoll {0}", brick.MotorA.TachoCount);
+            motor.Poll();
+            Debug.WriteLine("OnPoll {0}", motor.TachoCount);
 
-            return brick.MotorA.TachoCount.Value;
+            return motor.TachoCount.Value;
         }
 
         private static sbyte GetSpeed(MotorDirection direction)

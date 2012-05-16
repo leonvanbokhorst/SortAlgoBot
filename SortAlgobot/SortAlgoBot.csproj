@@ -46,7 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\INxtCommand.cs" />
+    <Compile Include="Commands\IRobotCommand.cs" />
+    <Compile Include="Commands\RobotLiftBallCommand.cs" />
+    <Compile Include="Commands\RobotDropBallCommand.cs" />
+    <Compile Include="Commands\RobotToPositionCommand.cs" />
     <Compile Include="Helpers\MotorHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BallPosition.cs" />

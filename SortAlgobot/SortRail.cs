@@ -5,6 +5,8 @@ namespace SortAlgoBot
     public class SortRail : Dictionary<BallPosition, SortRailLegoPosition>
     {
         private const int TachoPerPosition = 110;
+        private readonly int _lowerBoundery;
+        private readonly int _upperBoundery;
         private int _currentTacho;
 
         public SortRail()
@@ -25,6 +27,11 @@ namespace SortAlgoBot
             Add(BallPosition.Eleven, new SortRailLegoPosition(39));
             Add(BallPosition.Twelve, new SortRailLegoPosition(42));
             Add(BallPosition.Pivot, new SortRailLegoPosition(45));
+
+            _upperBoundery =
+                this[BallPosition.Pivot].Position*TachoPerPosition;
+            _lowerBoundery =
+                this[BallPosition.Home].Position*TachoPerPosition;
         }
 
         public int CurrentTacho
@@ -32,8 +39,13 @@ namespace SortAlgoBot
             get { return _currentTacho; }
             set
             {
-                int validatedValue = ValidateTachoBounderies(value);
-                _currentTacho = validatedValue;
+                if (value < _lowerBoundery)
+                    value = _lowerBoundery;
+
+                if (value > _upperBoundery)
+                    value = _upperBoundery;
+
+                _currentTacho = value;
             }
         }
 
@@ -43,36 +55,6 @@ namespace SortAlgoBot
             int absoluteTachoToPosition =
                 sortRailPosition.Position*TachoPerPosition;
             int result = absoluteTachoToPosition - CurrentTacho;
-
-            return result;
-        }
-
-        private int ValidateTachoBounderies(int value)
-        {
-            int result = 0;
-
-            if (ContainsKey(BallPosition.Pivot)
-                && ContainsKey(BallPosition.Home))
-            {
-                int upperBoundery =
-                    this[BallPosition.Pivot].Position*TachoPerPosition;
-                int lowerBoundery =
-                    this[BallPosition.Home].Position*TachoPerPosition;
-
-                if (_currentTacho + value < lowerBoundery || _currentTacho + value > upperBoundery)
-                {
-                    if (value < 0)
-                        result =
-                            this[BallPosition.Home].Position*TachoPerPosition;
-                    else
-                        result =
-                            this[BallPosition.Pivot].Position*TachoPerPosition;
-                }
-                else
-                {
-                    result = value;
-                }
-            }
 
             return result;
         }
