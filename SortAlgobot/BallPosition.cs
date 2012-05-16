@@ -3,6 +3,7 @@ namespace SortAlgoBot
     public enum BallPosition
     {
         Home,
+        Zero,
         One,
         Two,
         Three,

@@ -23,7 +23,7 @@ namespace SortAlgoBot.Helpers
             Thread.Sleep((int) (tacho*WaitMultiplier));
 
             motor.Poll();
-            Debug.WriteLine("OnPoll {0}", motor.TachoCount);
+            Debug.WriteLine("Real tacho {0}", motor.TachoCount);
 
             return motor.TachoCount.Value;
         }

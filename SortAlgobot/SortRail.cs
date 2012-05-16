@@ -14,6 +14,7 @@ namespace SortAlgoBot
             CurrentTacho = 0;
 
             Add(BallPosition.Home, new SortRailLegoPosition(0));
+            Add(BallPosition.Zero, new SortRailLegoPosition(6));
             Add(BallPosition.One, new SortRailLegoPosition(9));
             Add(BallPosition.Two, new SortRailLegoPosition(12));
             Add(BallPosition.Three, new SortRailLegoPosition(15));

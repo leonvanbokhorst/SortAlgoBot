@@ -49,6 +49,7 @@
     <Compile Include="Commands\IRobotCommand.cs" />
     <Compile Include="Commands\RobotLiftBallCommand.cs" />
     <Compile Include="Commands\RobotDropBallCommand.cs" />
+    <Compile Include="Commands\RobotReadColorCommand.cs" />
     <Compile Include="Commands\RobotToPositionCommand.cs" />
     <Compile Include="Helpers\MotorHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

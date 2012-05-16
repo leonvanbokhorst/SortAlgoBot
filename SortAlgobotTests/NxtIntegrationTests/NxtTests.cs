@@ -20,7 +20,7 @@ namespace SortAlgobotTests.NxtIntegrationTests
                 MotorA = new McNxtMotor(),
                 MotorB = new McNxtMotor(),
                 MotorC = new McNxtMotor(),
-                //Sensor3 = new Nxt2ColorSensor()
+                Sensor3 = new Nxt2ColorSensor()
             };
 
             _brick.Connect();
@@ -38,6 +38,21 @@ namespace SortAlgobotTests.NxtIntegrationTests
 
             Thread.Sleep(1000);
             _brick.Disconnect();
+        }
+
+        [TestMethod]
+        public void ShouldReadColorBallOnPositionSix()
+        {
+            var sortRail = new SortRail();
+
+            var c1 = new RobotToPositionCommand();
+            c1.Execute(_brick, sortRail, BallPosition.Six-1);
+
+            var command = new RobotReadColorCommand();
+            command.Execute(_brick, null, BallPosition.Home);
+
+            var c2 = new RobotToPositionCommand();
+            c2.Execute(_brick, sortRail, BallPosition.Home);
         }
 
         [TestMethod]
