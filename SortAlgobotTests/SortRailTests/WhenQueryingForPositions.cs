@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SortAlgoBot.SortRail;
+using SortAlgoBot;
 
 namespace SortAlgobotTests.SortRailTests
 {
@@ -19,7 +19,7 @@ namespace SortAlgobotTests.SortRailTests
                 var sortRail = new SortRail();
 
                 // Act
-                SortRailLegoPosition result = sortRail[(RailPosition) 15];
+                SortRailLegoPosition result = sortRail[(BallPosition) 15];
             }
 
             [TestMethod]
@@ -30,7 +30,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int excpected = 15;
 
                 // Act
-                SortRailLegoPosition result = sortRail[RailPosition.Three];
+                SortRailLegoPosition result = sortRail[BallPosition.Three];
 
                 // Assert
                 Assert.AreEqual(excpected, result.Position);
@@ -44,7 +44,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int excpected = 0;
 
                 // Act
-                SortRailLegoPosition result = sortRail[RailPosition.Home];
+                SortRailLegoPosition result = sortRail[BallPosition.Home];
 
                 // Assert
                 Assert.AreEqual(excpected, result.Position);
@@ -58,7 +58,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int excpected = 45;
 
                 // Act
-                SortRailLegoPosition result = sortRail[RailPosition.Pivot];
+                SortRailLegoPosition result = sortRail[BallPosition.Pivot];
 
                 // Assert
                 Assert.AreEqual(excpected, result.Position);

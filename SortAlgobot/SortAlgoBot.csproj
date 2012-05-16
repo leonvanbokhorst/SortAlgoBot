@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NKH.MindSqualls, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\MindSqualls\NKH.MindSqualls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -38,22 +41,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WinUsbWrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\MindSqualls\WinUsbWrapper.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\INxtCommand.cs" />
     <Compile Include="Helpers\MotorHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SortRail\RailPosition.cs" />
+    <Compile Include="BallPosition.cs" />
     <Compile Include="Exceptions\LegoPositionOutOfBoundsException.cs" />
-    <Compile Include="SortRail\SortRail.cs" />
-    <Compile Include="SortRail\SortRailLegoPosition.cs" />
+    <Compile Include="SortRail.cs" />
+    <Compile Include="SortRailLegoPosition.cs" />
     <Compile Include="Exceptions\TachoOutOfBoundsException.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\NKH.MindSqualls\NKH.MindSqualls.csproj">
-      <Project>{9973018E-FC09-4549-A484-0B702ADE1EE9}</Project>
-      <Name>NKH.MindSqualls</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

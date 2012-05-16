@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SortAlgoBot.SortRail;
+using SortAlgoBot;
 
 namespace SortAlgobotTests.SortRailTests
 {
@@ -19,7 +19,7 @@ namespace SortAlgobotTests.SortRailTests
                 var sortRail = new SortRail();
 
                 // Act
-                int result = sortRail.GetTachoToPosition((RailPosition) 15);
+                int result = sortRail.GetTachoToPosition((BallPosition) 15);
             }
 
             [TestMethod]
@@ -31,7 +31,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = 0;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(RailPosition.Home);
+                int result = sortRail.GetTachoToPosition(BallPosition.Home);
 
                 // Assert
                 Assert.AreEqual(expected, result);
@@ -46,7 +46,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = 2640;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(RailPosition.Six);
+                int result = sortRail.GetTachoToPosition(BallPosition.Six);
 
                 // Assert
                 Assert.AreEqual(expected, result);
@@ -61,7 +61,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = 4950;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(RailPosition.Pivot);
+                int result = sortRail.GetTachoToPosition(BallPosition.Pivot);
 
                 // Assert
                 Assert.AreEqual(expected, result);
@@ -76,7 +76,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = 0;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(RailPosition.Pivot);
+                int result = sortRail.GetTachoToPosition(BallPosition.Pivot);
 
                 // Assert
                 Assert.AreEqual(expected, result);
@@ -91,7 +91,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = 0;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(RailPosition.Six);
+                int result = sortRail.GetTachoToPosition(BallPosition.Six);
 
                 // Assert
                 Assert.AreEqual(expected, result);
@@ -106,7 +106,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = -1000;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(RailPosition.Home);
+                int result = sortRail.GetTachoToPosition(BallPosition.Home);
 
                 // Assert
                 Assert.AreEqual(expected, result);
@@ -121,7 +121,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = -1000;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(RailPosition.Six);
+                int result = sortRail.GetTachoToPosition(BallPosition.Six);
 
                 // Assert
                 Assert.AreEqual(expected, result);
@@ -136,7 +136,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = 1000;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(RailPosition.Six);
+                int result = sortRail.GetTachoToPosition(BallPosition.Six);
 
                 // Assert
                 Assert.AreEqual(expected, result);

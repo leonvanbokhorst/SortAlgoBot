@@ -1,6 +1,6 @@
 using SortAlgoBot.Exceptions;
 
-namespace SortAlgoBot.SortRail
+namespace SortAlgoBot
 {
     public class SortRailLegoPosition
     {

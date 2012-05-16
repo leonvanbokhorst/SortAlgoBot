@@ -1,6 +1,6 @@
-namespace SortAlgoBot.SortRail
+namespace SortAlgoBot
 {
-    public enum RailPosition
+    public enum BallPosition
     {
         Home,
         One,
