@@ -4,6 +4,5 @@ namespace SortAlgoBot.Exceptions
 {
     public class LegoPositionOutOfBoundsException : Exception
     {
-
     }
 }

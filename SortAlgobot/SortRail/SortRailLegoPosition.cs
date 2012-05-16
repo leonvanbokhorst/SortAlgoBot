@@ -6,7 +6,7 @@ namespace SortAlgoBot.SortRail
     {
         public SortRailLegoPosition(int position)
         {
-            if(position < 0 || position > 45)
+            if (position < 0 || position > 45)
                 throw new LegoPositionOutOfBoundsException();
 
             Position = position;
