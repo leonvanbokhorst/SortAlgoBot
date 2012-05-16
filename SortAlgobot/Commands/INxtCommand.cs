@@ -25,7 +25,7 @@ namespace SortAlgoBot.Commands
 
             int resultTacho = MotorHelper.RunAndWait(
                 brick,
-                Math.Abs(tacho),
+                (uint) Math.Abs(tacho),
                 motorDirection);
 
             sortRail.CurrentTacho += resultTacho;

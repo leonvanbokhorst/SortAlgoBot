@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading;
 using NKH.MindSqualls.MotorControl;
 
@@ -15,14 +14,13 @@ namespace SortAlgoBot.Helpers
     {
         private const int WaitMultiplier = 6;
 
-        public static int RunAndWait(McNxtBrick brick, int tacho,
+        public static int RunAndWait(McNxtBrick brick, uint tacho,
                                      MotorDirection direction)
         {
-            var absTacho = (uint) Math.Abs(tacho);
             sbyte speed = GetSpeed(direction);
 
-            brick.MotorA.Run(speed, absTacho);
-            Thread.Sleep((int) (absTacho*WaitMultiplier));
+            brick.MotorA.Run(speed, tacho);
+            Thread.Sleep((int) (tacho*WaitMultiplier));
 
             brick.MotorA.Poll();
             Debug.WriteLine("OnPoll {0}", brick.MotorA.TachoCount);

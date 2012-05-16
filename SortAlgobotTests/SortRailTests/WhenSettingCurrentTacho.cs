@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SortAlgoBot;
-using SortAlgoBot.Exceptions;
 
 namespace SortAlgobotTests.SortRailTests
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using SortAlgoBot.Exceptions;
+﻿using System.Collections.Generic;
 
 namespace SortAlgoBot
 {
@@ -34,7 +32,7 @@ namespace SortAlgoBot
             get { return _currentTacho; }
             set
             {
-                var validatedValue = ValidateTachoBounderies(value);
+                int validatedValue = ValidateTachoBounderies(value);
                 _currentTacho = validatedValue;
             }
         }
@@ -43,7 +41,7 @@ namespace SortAlgoBot
         {
             SortRailLegoPosition sortRailPosition = this[position];
             int absoluteTachoToPosition =
-                sortRailPosition.Position * TachoPerPosition;
+                sortRailPosition.Position*TachoPerPosition;
             int result = absoluteTachoToPosition - CurrentTacho;
 
             return result;
@@ -51,30 +49,29 @@ namespace SortAlgoBot
 
         private int ValidateTachoBounderies(int value)
         {
-            var result = 0;
+            int result = 0;
 
             if (ContainsKey(BallPosition.Pivot)
                 && ContainsKey(BallPosition.Home))
             {
                 int upperBoundery =
-                    this[BallPosition.Pivot].Position * TachoPerPosition;
+                    this[BallPosition.Pivot].Position*TachoPerPosition;
                 int lowerBoundery =
-                    this[BallPosition.Home].Position * TachoPerPosition;
+                    this[BallPosition.Home].Position*TachoPerPosition;
 
                 if (_currentTacho + value < lowerBoundery || _currentTacho + value > upperBoundery)
                 {
                     if (value < 0)
                         result =
-                            this[BallPosition.Home].Position * TachoPerPosition;
+                            this[BallPosition.Home].Position*TachoPerPosition;
                     else
                         result =
-                            this[BallPosition.Pivot].Position * TachoPerPosition;
+                            this[BallPosition.Pivot].Position*TachoPerPosition;
                 }
                 else
                 {
                     result = value;
                 }
-
             }
 
             return result;
