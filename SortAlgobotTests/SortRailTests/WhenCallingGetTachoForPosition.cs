@@ -61,7 +61,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = 4950;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(BallPosition.Pivot);
+                int result = sortRail.GetTachoToPosition(BallPosition.Swap);
 
                 // Assert
                 Assert.AreEqual(expected, result);
@@ -76,7 +76,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int expected = 0;
 
                 // Act
-                int result = sortRail.GetTachoToPosition(BallPosition.Pivot);
+                int result = sortRail.GetTachoToPosition(BallPosition.Swap);
 
                 // Assert
                 Assert.AreEqual(expected, result);

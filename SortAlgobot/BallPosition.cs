@@ -16,6 +16,6 @@ namespace SortAlgoBot
         Ten,
         Eleven,
         Twelve,
-        Pivot
+        Swap
     }
 }

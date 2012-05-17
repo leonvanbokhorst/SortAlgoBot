@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\RoboQuickSort.cs" />
-    <Compile Include="Commands\IRobotCommand.cs" />
     <Compile Include="Commands\RobotLiftBallCommand.cs" />
     <Compile Include="Commands\RobotDropBallCommand.cs" />
     <Compile Include="Commands\RobotReadColorCommand.cs" />

@@ -1,26 +1,32 @@
 using System.Diagnostics;
+using System.Threading;
 using NKH.MindSqualls;
 using NKH.MindSqualls.MotorControl;
 
 namespace SortAlgoBot.Commands
 {
-    public class RobotReadColorCommand : IRobotCommand
+    public class RobotReadColorCommand
     {
         #region IRobotCommand Members
 
-        public void Execute(McNxtBrick brick, SortRail sortRail, BallPosition position)
+        public Nxt2Color Execute(McNxtBrick brick)
         {
             var colorSensor = brick.Sensor3 as Nxt2ColorSensor;
+            Nxt2Color? color = null;
+
             if (colorSensor != null)
             {
                 colorSensor.SetColorDetectorMode();
-                //colorSensor.SetColorRange(Nxt2Color.Black, Nxt2Color.White);
                 colorSensor.Poll();
-                Nxt2Color? color = colorSensor.Color;
+                color = colorSensor.Color;
+
+                Thread.Sleep(500);
 
                 if (color != null)
                     Debug.WriteLine("Color {0}", color.Value);
             }
+
+            return color.Value;
         }
 
         #endregion

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NKH.MindSqualls;
 using NKH.MindSqualls.MotorControl;
 using SortAlgoBot;
+using SortAlgoBot.Algorithms;
 using SortAlgoBot.Commands;
 
 namespace SortAlgobotTests.NxtIntegrationTests
@@ -12,7 +13,7 @@ namespace SortAlgobotTests.NxtIntegrationTests
     {
         private McNxtBrick _brick;
 
-        [TestInitialize]
+        //[TestInitialize]
         public void InitRobot()
         {
             _brick = new McNxtBrick(NxtCommLinkType.USB, 0)
@@ -30,7 +31,7 @@ namespace SortAlgobotTests.NxtIntegrationTests
                 _brick.StartMotorControl();
         }
 
-        [TestCleanup]
+        //[TestCleanup]
         public void CleanupRobot()
         {
             if (_brick.IsMotorControlRunning())
@@ -38,6 +39,16 @@ namespace SortAlgobotTests.NxtIntegrationTests
 
             Thread.Sleep(1000);
             _brick.Disconnect();
+        }
+
+        [TestMethod]
+        public void ReadAndSort()
+        {
+            var algo = new RoboSortAlgorithm();
+            algo.QuickSort(0, 11);
+            algo.RobotGoHome();
+            algo.CleanupRobot();
+
         }
 
         [TestMethod]
@@ -49,7 +60,7 @@ namespace SortAlgobotTests.NxtIntegrationTests
             c1.Execute(_brick, sortRail, BallPosition.Six - 1);
 
             var command = new RobotReadColorCommand();
-            command.Execute(_brick, null, BallPosition.Home);
+            command.Execute(_brick);
 
             var c2 = new RobotToPositionCommand();
             c2.Execute(_brick, sortRail, BallPosition.Home);
@@ -64,7 +75,7 @@ namespace SortAlgobotTests.NxtIntegrationTests
             c1.Execute(_brick, sortRail, BallPosition.Six);
 
             var command = new RobotLiftBallCommand();
-            command.Execute(_brick, null, BallPosition.Home);
+            command.Execute(_brick);
 
             var c2 = new RobotToPositionCommand();
             c2.Execute(_brick, sortRail, BallPosition.Home);
@@ -74,14 +85,14 @@ namespace SortAlgobotTests.NxtIntegrationTests
         public void ShouldLiftBallAndFallBack()
         {
             var command = new RobotLiftBallCommand();
-            command.Execute(_brick, null, BallPosition.Home);
+            command.Execute(_brick);
         }
 
         [TestMethod]
         public void ShouldDropBallAndTurnBack()
         {
             var command = new RobotDropBallCommand();
-            command.Execute(_brick, null, BallPosition.Home);
+            command.Execute(_brick);
         }
 
         [TestMethod]

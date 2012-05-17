@@ -58,7 +58,7 @@ namespace SortAlgobotTests.SortRailTests
                 const int excpected = 45;
 
                 // Act
-                SortRailLegoPosition result = sortRail[BallPosition.Pivot];
+                SortRailLegoPosition result = sortRail[BallPosition.Swap];
 
                 // Assert
                 Assert.AreEqual(excpected, result.Position);

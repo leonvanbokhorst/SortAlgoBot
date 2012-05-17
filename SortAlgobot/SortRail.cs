@@ -27,10 +27,10 @@ namespace SortAlgoBot
             Add(BallPosition.Ten, new SortRailLegoPosition(36));
             Add(BallPosition.Eleven, new SortRailLegoPosition(39));
             Add(BallPosition.Twelve, new SortRailLegoPosition(42));
-            Add(BallPosition.Pivot, new SortRailLegoPosition(45));
+            Add(BallPosition.Swap, new SortRailLegoPosition(45));
 
             _upperBoundery =
-                this[BallPosition.Pivot].Position*TachoPerPosition;
+                this[BallPosition.Swap].Position*TachoPerPosition;
             _lowerBoundery =
                 this[BallPosition.Home].Position*TachoPerPosition;
         }
@@ -40,11 +40,11 @@ namespace SortAlgoBot
             get { return _currentTacho; }
             set
             {
-                //if (value < _lowerBoundery)
-                //    value = _lowerBoundery;
+                if (value < _lowerBoundery)
+                    value = _lowerBoundery;
 
-                //if (value > _upperBoundery)
-                //    value = _upperBoundery;
+                if (value > _upperBoundery)
+                    value = _upperBoundery;
 
                 _currentTacho = value;
             }

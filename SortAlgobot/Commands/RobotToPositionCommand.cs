@@ -5,7 +5,7 @@ using SortAlgoBot.Helpers;
 
 namespace SortAlgoBot.Commands
 {
-    public class RobotToPositionCommand : IRobotCommand
+    public class RobotToPositionCommand
     {
         #region IRobotCommand Members
 
@@ -19,18 +19,22 @@ namespace SortAlgoBot.Commands
                 motorDirection = MotorDirection.Backward;
             }
 
-            var absTacho = (uint) Math.Abs(tacho);
+            var absTacho = (uint)Math.Abs(tacho);
 
-            Debug.WriteLine("Heading for position {0} with tacho {1}",
-                            position,
-                            tacho);
+            if (absTacho != 0)
+            {
 
-            int resultTacho = MotorHelper.RunAndWaitOnCompletion(
-                (McNxtMotor) brick.MotorA,
-                absTacho,
-                motorDirection);
+                Debug.WriteLine("Heading for position {0} with tacho {1}",
+                                position,
+                                tacho);
 
-            sortRail.CurrentTacho += resultTacho;
+                int resultTacho = MotorHelper.RunAndWaitOnCompletion(
+                    (McNxtMotor)brick.MotorA,
+                    absTacho,
+                    motorDirection);
+
+                sortRail.CurrentTacho += resultTacho;
+            }
         }
 
         #endregion
