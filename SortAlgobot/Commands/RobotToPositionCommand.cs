@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using NKH.MindSqualls.MotorControl;
 using SortAlgoBot.Helpers;
 
@@ -20,7 +21,11 @@ namespace SortAlgoBot.Commands
 
             var absTacho = (uint) Math.Abs(tacho);
 
-            int resultTacho = MotorHelper.RunAndWait(
+            Debug.WriteLine("Heading for position {0} with tacho {1}",
+                position,
+                tacho);
+
+            int resultTacho = MotorHelper.RunAndWaitOnCompletion(
                 (McNxtMotor) brick.MotorA,
                 absTacho,
                 motorDirection);

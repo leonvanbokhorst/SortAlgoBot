@@ -11,11 +11,11 @@ namespace SortAlgobotTests.SortRailTests
         public class WhenSortRailIsConstructed
         {
             [TestMethod]
-            public void ShouldHold14Positions()
+            public void ShouldHold15Positions()
             {
                 // Arange
                 var sortRail = new SortRail();
-                const int expected = 14;
+                const int expected = 15;
 
                 // Act
                 // None
