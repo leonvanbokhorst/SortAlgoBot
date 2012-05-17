@@ -6,6 +6,8 @@ namespace SortAlgoBot.Commands
 {
     public class RobotReadColorCommand : IRobotCommand
     {
+        #region IRobotCommand Members
+
         public void Execute(McNxtBrick brick, SortRail sortRail, BallPosition position)
         {
             var colorSensor = brick.Sensor3 as Nxt2ColorSensor;
@@ -14,11 +16,13 @@ namespace SortAlgoBot.Commands
                 colorSensor.SetColorDetectorMode();
                 //colorSensor.SetColorRange(Nxt2Color.Black, Nxt2Color.White);
                 colorSensor.Poll();
-                var color = colorSensor.Color;
+                Nxt2Color? color = colorSensor.Color;
 
-                if (color != null) 
+                if (color != null)
                     Debug.WriteLine("Color {0}", color.Value);
             }
         }
+
+        #endregion
     }
 }

@@ -22,8 +22,8 @@ namespace SortAlgoBot.Commands
             var absTacho = (uint) Math.Abs(tacho);
 
             Debug.WriteLine("Heading for position {0} with tacho {1}",
-                position,
-                tacho);
+                            position,
+                            tacho);
 
             int resultTacho = MotorHelper.RunAndWaitOnCompletion(
                 (McNxtMotor) brick.MotorA,

@@ -16,12 +16,12 @@ namespace SortAlgobotTests.NxtIntegrationTests
         public void InitRobot()
         {
             _brick = new McNxtBrick(NxtCommLinkType.USB, 0)
-            {
-                MotorA = new McNxtMotor(),
-                MotorB = new McNxtMotor(),
-                MotorC = new McNxtMotor(),
-                Sensor3 = new Nxt2ColorSensor()
-            };
+                         {
+                             MotorA = new McNxtMotor(),
+                             MotorB = new McNxtMotor(),
+                             MotorC = new McNxtMotor(),
+                             Sensor3 = new Nxt2ColorSensor()
+                         };
 
             _brick.Connect();
             _brick.CommLink.KeepAlive();
@@ -46,7 +46,7 @@ namespace SortAlgobotTests.NxtIntegrationTests
             var sortRail = new SortRail();
 
             var c1 = new RobotToPositionCommand();
-            c1.Execute(_brick, sortRail, BallPosition.Six-1);
+            c1.Execute(_brick, sortRail, BallPosition.Six - 1);
 
             var command = new RobotReadColorCommand();
             command.Execute(_brick, null, BallPosition.Home);
@@ -139,7 +139,6 @@ namespace SortAlgobotTests.NxtIntegrationTests
 
             var c12 = new RobotToPositionCommand();
             c12.Execute(_brick, sortRail, BallPosition.Home);
-
         }
     }
 }
