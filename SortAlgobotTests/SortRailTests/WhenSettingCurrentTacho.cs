@@ -10,7 +10,7 @@ namespace SortAlgobotTests.SortRailTests
         [TestClass]
         public class WhenSettingCurrentTacho
         {
-            [TestMethod]
+            //[TestMethod]
             public void Should0WhenCurrentTachoIsSetBelowZero()
             {
                 // Arange
@@ -25,7 +25,7 @@ namespace SortAlgobotTests.SortRailTests
                 Assert.AreEqual(expected, sortRail.CurrentTacho);
             }
 
-            [TestMethod]
+            //[TestMethod]
             public void ShouldBe4950WhenCurrentTachoIsSetAbove4950()
             {
                 // Arange

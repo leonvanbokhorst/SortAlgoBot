@@ -40,11 +40,11 @@ namespace SortAlgoBot
             get { return _currentTacho; }
             set
             {
-                if (value < _lowerBoundery)
-                    value = _lowerBoundery;
+                //if (value < _lowerBoundery)
+                //    value = _lowerBoundery;
 
-                if (value > _upperBoundery)
-                    value = _upperBoundery;
+                //if (value > _upperBoundery)
+                //    value = _upperBoundery;
 
                 _currentTacho = value;
             }
