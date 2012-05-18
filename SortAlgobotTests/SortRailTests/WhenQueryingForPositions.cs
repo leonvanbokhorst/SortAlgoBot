@@ -4,67 +4,67 @@ using SortAlgoBot;
 
 namespace SortAlgobotTests.SortRailTests
 {
-    public partial class SortRailTests
-    {
-        #region Nested type: WhenQueryingForPositions
+	public partial class SortRailTests
+	{
+		#region Nested type: WhenQueryingForPositions
 
-        [TestClass]
-        public class WhenQueryingForPositions
-        {
-            [TestMethod]
-            [ExpectedException(typeof (KeyNotFoundException))]
-            public void ShouldFailOnPosition15()
-            {
-                // Arange
-                var sortRail = new SortRail();
+		[TestClass]
+		public class WhenQueryingForPositions
+		{
+			[TestMethod]
+			[ExpectedException(typeof (KeyNotFoundException))]
+			public void ShouldFailOnPosition15()
+			{
+				// Arange
+				var sortRail = new SortRail();
 
-                // Act
-                SortRailLegoPosition result = sortRail[(BallPosition) 15];
-            }
+				// Act
+				SortRailLegoPosition result = sortRail[(BallPosition) 15];
+			}
 
-            [TestMethod]
-            public void ShouldReturnPositionTacho15OnBall3()
-            {
-                // Arange
-                var sortRail = new SortRail();
-                const int excpected = 15;
+			[TestMethod]
+			public void ShouldReturnPositionTacho15OnBall3()
+			{
+				// Arange
+				var sortRail = new SortRail();
+				const int excpected = 15;
 
-                // Act
-                SortRailLegoPosition result = sortRail[BallPosition.Three];
+				// Act
+				SortRailLegoPosition result = sortRail[BallPosition.Three];
 
-                // Assert
-                Assert.AreEqual(excpected, result.Position);
-            }
+				// Assert
+				Assert.AreEqual(excpected, result.Position);
+			}
 
-            [TestMethod]
-            public void ShouldReturnPositionTacho0OnBallHome()
-            {
-                // Arange
-                var sortRail = new SortRail();
-                const int excpected = 0;
+			[TestMethod]
+			public void ShouldReturnPositionTacho0OnBallHome()
+			{
+				// Arange
+				var sortRail = new SortRail();
+				const int excpected = 0;
 
-                // Act
-                SortRailLegoPosition result = sortRail[BallPosition.Home];
+				// Act
+				SortRailLegoPosition result = sortRail[BallPosition.Home];
 
-                // Assert
-                Assert.AreEqual(excpected, result.Position);
-            }
+				// Assert
+				Assert.AreEqual(excpected, result.Position);
+			}
 
-            [TestMethod]
-            public void ShouldReturnPositionTacho45OnBallPivot()
-            {
-                // Arange
-                var sortRail = new SortRail();
-                const int excpected = 45;
+			[TestMethod]
+			public void ShouldReturnPositionTacho45OnBallPivot()
+			{
+				// Arange
+				var sortRail = new SortRail();
+				const int excpected = 45;
 
-                // Act
-                SortRailLegoPosition result = sortRail[BallPosition.Swap];
+				// Act
+				SortRailLegoPosition result = sortRail[BallPosition.Swap];
 
-                // Assert
-                Assert.AreEqual(excpected, result.Position);
-            }
-        }
+				// Assert
+				Assert.AreEqual(excpected, result.Position);
+			}
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

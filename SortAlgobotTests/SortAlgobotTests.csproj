@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="NxtIntegrationTests\NxtTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SortRailTests\WhenSortRailPositionIsConstructed.cs" />
     <Compile Include="SortRailTests\WhenCallingGetTachoForPosition.cs" />
     <Compile Include="SortRailTests\WhenSettingCurrentTacho.cs" />
     <Compile Include="SortRailTests\WhenSortRailIsConstructed.cs" />

@@ -1,155 +1,112 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NKH.MindSqualls;
-using NKH.MindSqualls.MotorControl;
 using SortAlgoBot;
 using SortAlgoBot.Algorithms;
 using SortAlgoBot.Commands;
+using SortAlgoBot.Commands.Sequences;
+using SortAlgoBot.Helpers;
 
 namespace SortAlgobotTests.NxtIntegrationTests
 {
-    [TestClass]
-    public class NxtTests
-    {
-        private McNxtBrick _brick;
+	[TestClass]
+	public class NxtTests
+	{
+		private SortRobot _robot;
+		private SortRail _sortRail;
 
-        //[TestInitialize]
-        public void InitRobot()
-        {
-            _brick = new McNxtBrick(NxtCommLinkType.USB, 0)
-                         {
-                             MotorA = new McNxtMotor(),
-                             MotorB = new McNxtMotor(),
-                             MotorC = new McNxtMotor(),
-                             Sensor3 = new Nxt2ColorSensor()
-                         };
+		[TestInitialize]
+		public void InitRobot()
+		{
+			_robot = new SortRobot();
+			_sortRail = new SortRail();
+		}
 
-            _brick.Connect();
-            _brick.CommLink.KeepAlive();
+		[TestCleanup]
+		public void CleanupRobot()
+		{
+			_robot.Dispose();
+		}
 
-            if (!_brick.IsMotorControlRunning())
-                _brick.StartMotorControl();
-        }
+		[TestMethod]
+		public void ReadAndSort()
+		{
+			// Scan all color balls in one sequence from pos 12 to home and return list<int>
 
-        //[TestCleanup]
-        public void CleanupRobot()
-        {
-            if (_brick.IsMotorControlRunning())
-                _brick.StopMotorControl();
+			var algo = new RoboSortAlgorithm(new List<int> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+			algo.PivotPicked += AlgoPivotPicked;
+			algo.Swap += AlgoSwap;
 
-            Thread.Sleep(1000);
-            _brick.Disconnect();
-        }
+			algo.QuickSort(0, 11); // TODO EVENTS
+		}
 
-        [TestMethod]
-        public void ReadAndSort()
-        {
-            var algo = new RoboSortAlgorithm();
-            algo.QuickSort(0, 11);
-            algo.RobotGoHome();
-            algo.CleanupRobot();
+		private void AlgoSwap(int leftPointer, int rightPointer)
+		{
+			var swapBallsCommandSequence = new RobotSwapBallsCommandSequence(
+				_robot,
+				_sortRail,
+				MotorHelper.GetBallPosition(leftPointer),
+				MotorHelper.GetBallPosition(rightPointer));
 
-        }
+			swapBallsCommandSequence.Execute();
+		}
 
-        [TestMethod]
-        public void ShouldReadColorBallOnPositionSix()
-        {
-            var sortRail = new SortRail();
+		private void AlgoPivotPicked(int leftPointer, int rightPointer)
+		{
+			var beepCommand = new RobotBeep(_robot);
+			beepCommand.Execute();
+		}
 
-            var c1 = new RobotToPositionCommand();
-            c1.Execute(_brick, sortRail, BallPosition.Six - 1);
+		[TestMethod]
+		public void ShouldReadColorBallOnPositionSix()
+		{
+			var sortRail = new SortRail();
 
-            var command = new RobotReadColorCommand();
-            command.Execute(_brick);
+			var moveToColorReadSixCommand = new RobotMoveToPosition(_robot, sortRail, BallPosition.Six - 1);
+			moveToColorReadSixCommand.Execute();
 
-            var c2 = new RobotToPositionCommand();
-            c2.Execute(_brick, sortRail, BallPosition.Home);
-        }
+			var readColorCommand = new RobotReadColor(_robot);
+			readColorCommand.Execute();
 
-        [TestMethod]
-        public void ShouldDeliverBallOnPositionSix()
-        {
-            var sortRail = new SortRail();
+			var moveBackHomeCommand = new RobotMoveToPosition(_robot, sortRail, BallPosition.Home);
+			moveBackHomeCommand.Execute();
+		}
 
-            var c1 = new RobotToPositionCommand();
-            c1.Execute(_brick, sortRail, BallPosition.Six);
+		[TestMethod]
+		public void ShouldDeliverBallOnPositionSix()
+		{
+			var sortRail = new SortRail();
 
-            var command = new RobotLiftBallCommand();
-            command.Execute(_brick);
+			var moveToSixCommand = new RobotMoveToPosition(_robot, sortRail, BallPosition.Six);
+			moveToSixCommand.Execute();
 
-            var c2 = new RobotToPositionCommand();
-            c2.Execute(_brick, sortRail, BallPosition.Home);
-        }
+			var liftBallCommand = new RobotLiftBall(_robot);
+			liftBallCommand.Execute();
 
-        [TestMethod]
-        public void ShouldLiftBallAndFallBack()
-        {
-            var command = new RobotLiftBallCommand();
-            command.Execute(_brick);
-        }
+			var moveBackHomeCommand = new RobotMoveToPosition(_robot, sortRail, BallPosition.Home);
+			moveBackHomeCommand.Execute();
+		}
 
-        [TestMethod]
-        public void ShouldDropBallAndTurnBack()
-        {
-            var command = new RobotDropBallCommand();
-            command.Execute(_brick);
-        }
+		[TestMethod]
+		public void ShouldLiftBallAndFallBack()
+		{
+			var command = new RobotLiftBall(_robot);
+			command.Execute();
+		}
 
-        [TestMethod]
-        public void ShouldMoveTheRobotForwardToPos8AndBackHome()
-        {
-            var sortRail = new SortRail();
+		[TestMethod]
+		public void ShouldDropBallAndTurnBack()
+		{
+			var command = new RobotDropBall(_robot);
+			command.Execute();
+		}
 
-            var commandEight = new RobotToPositionCommand();
-            commandEight.Execute(_brick, sortRail, BallPosition.Eight);
+		[TestMethod]
+		public void ShouldMoveTheRobotForwardToPos8()
+		{
+			var sortRail = new SortRail();
 
-            var commandBack = new RobotToPositionCommand();
-            commandBack.Execute(_brick, sortRail, BallPosition.Home);
-        }
-
-        [TestMethod]
-        public void ShouldMoveTheRobotForwardToPos3And6AndBack1()
-        {
-            var sortRail = new SortRail();
-
-            var command1 = new RobotToPositionCommand();
-            command1.Execute(_brick, sortRail, BallPosition.Two);
-
-            var command2 = new RobotToPositionCommand();
-            command2.Execute(_brick, sortRail, BallPosition.One);
-
-            var command3 = new RobotToPositionCommand();
-            command3.Execute(_brick, sortRail, BallPosition.Three);
-
-            var c4 = new RobotToPositionCommand();
-            c4.Execute(_brick, sortRail, BallPosition.Seven);
-
-            var c5 = new RobotToPositionCommand();
-            c5.Execute(_brick, sortRail, BallPosition.Nine);
-
-            var c6 = new RobotToPositionCommand();
-            c6.Execute(_brick, sortRail, BallPosition.Eight);
-
-            var c7 = new RobotToPositionCommand();
-            c7.Execute(_brick, sortRail, BallPosition.Twelve);
-
-            var c8 = new RobotToPositionCommand();
-            c8.Execute(_brick, sortRail, BallPosition.Ten);
-
-            var c9 = new RobotToPositionCommand();
-            c9.Execute(_brick, sortRail, BallPosition.Eleven);
-
-            var c13 = new RobotToPositionCommand();
-            c13.Execute(_brick, sortRail, BallPosition.Four);
-
-            var c10 = new RobotToPositionCommand();
-            c10.Execute(_brick, sortRail, BallPosition.Six);
-
-            var c11 = new RobotToPositionCommand();
-            c11.Execute(_brick, sortRail, BallPosition.Five);
-
-            var c12 = new RobotToPositionCommand();
-            c12.Execute(_brick, sortRail, BallPosition.Home);
-        }
-    }
+			var commandEight = new RobotMoveToPosition(_robot, sortRail, BallPosition.Eight);
+			commandEight.Execute();
+		}
+	}
 }

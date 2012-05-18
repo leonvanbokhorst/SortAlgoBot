@@ -1,17 +1,12 @@
-using SortAlgoBot.Exceptions;
-
 namespace SortAlgoBot
 {
-    public class SortRailLegoPosition
-    {
-        public SortRailLegoPosition(int position)
-        {
-            if (position < 0 || position > 45)
-                throw new LegoPositionOutOfBoundsException();
+	public class SortRailLegoPosition
+	{
+		public SortRailLegoPosition(int position)
+		{
+			Position = position;
+		}
 
-            Position = position;
-        }
-
-        public int Position { get; private set; }
-    }
+		public int Position { get; private set; }
+	}
 }

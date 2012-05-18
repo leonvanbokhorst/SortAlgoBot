@@ -47,18 +47,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\RoboQuickSort.cs" />
-    <Compile Include="Commands\RobotLiftBallCommand.cs" />
-    <Compile Include="Commands\RobotDropBallCommand.cs" />
-    <Compile Include="Commands\RobotReadColorCommand.cs" />
-    <Compile Include="Commands\RobotToPositionCommand.cs" />
+    <Compile Include="Commands\IRobotCommand.cs" />
+    <Compile Include="Commands\IRobotValueCommand.cs" />
+    <Compile Include="Commands\RobotBeep.cs" />
+    <Compile Include="Commands\RobotLiftBall.cs" />
+    <Compile Include="Commands\RobotDropBall.cs" />
+    <Compile Include="Commands\RobotReadColor.cs" />
+    <Compile Include="Commands\RobotMoveToPosition.cs" />
+    <Compile Include="Commands\Sequences\RobotSwapBallsCommandSequence.cs" />
     <Compile Include="Helpers\MotorDirection.cs" />
     <Compile Include="Helpers\MotorHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BallPosition.cs" />
-    <Compile Include="Exceptions\LegoPositionOutOfBoundsException.cs" />
+    <Compile Include="SortRailBallPosition.cs" />
     <Compile Include="SortRail.cs" />
     <Compile Include="SortRailLegoPosition.cs" />
-    <Compile Include="Exceptions\TachoOutOfBoundsException.cs" />
+    <Compile Include="SortRobot.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
