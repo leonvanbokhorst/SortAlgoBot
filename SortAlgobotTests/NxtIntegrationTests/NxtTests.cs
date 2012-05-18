@@ -2,8 +2,8 @@
 using SortAlgoBot;
 using SortAlgoBot.Algorithms;
 using SortAlgoBot.Commands;
-using SortAlgoBot.Commands.Sequences;
 using SortAlgoBot.Helpers;
+using SortAlgoBot.Sequences;
 
 namespace SortAlgobotTests.NxtIntegrationTests
 {
@@ -31,9 +31,9 @@ namespace SortAlgobotTests.NxtIntegrationTests
         {
             var scanColorSequence = new RobotScanAllColorsCommandSequence(_robot, _sortRail);
             scanColorSequence.Execute();
-            
+
             var sortAlgorithm = new RoboSortAlgorithm(_sortRail.SortList);
-            
+
             sortAlgorithm.PivotPicked += AlgoPivotPicked;
             sortAlgorithm.Swap += AlgoSwap;
             sortAlgorithm.Done += AlgoDone;

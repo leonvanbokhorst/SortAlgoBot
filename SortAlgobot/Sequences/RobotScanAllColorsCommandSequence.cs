@@ -1,4 +1,6 @@
-namespace SortAlgoBot.Commands.Sequences
+using SortAlgoBot.Commands;
+
+namespace SortAlgoBot.Sequences
 {
     public class RobotScanAllColorsCommandSequence : IRobotCommand
     {

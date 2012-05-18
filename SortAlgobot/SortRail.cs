@@ -31,9 +31,9 @@ namespace SortAlgoBot
             Add(BallPosition.Swap, new SortRailLegoPosition(45));
 
             _upperBoundery =
-                this[BallPosition.Swap].Position*TachoPerPosition;
+                this[BallPosition.Swap].Position * TachoPerPosition;
             _lowerBoundery =
-                this[BallPosition.Home].Position*TachoPerPosition;
+                this[BallPosition.Home].Position * TachoPerPosition;
         }
 
         public List<int> SortList { get; set; }
@@ -61,7 +61,7 @@ namespace SortAlgoBot
         {
             SortRailLegoPosition sortRailPosition = this[position];
             int absoluteTachoToPosition =
-                sortRailPosition.Position*TachoPerPosition;
+                sortRailPosition.Position * TachoPerPosition;
             int result = absoluteTachoToPosition - CurrentTacho;
 
             return result;

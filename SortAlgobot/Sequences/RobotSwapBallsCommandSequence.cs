@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using SortAlgoBot.Commands;
 
-namespace SortAlgoBot.Commands.Sequences
+namespace SortAlgoBot.Sequences
 {
     public class RobotSwapBallsCommandSequence : IRobotCommand
     {

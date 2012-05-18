@@ -20,6 +20,9 @@ namespace SortAlgobotTests.SortRailTests
 
                 // Act
                 SortRailLegoPosition result = sortRail[(BallPosition) 15];
+
+                // Assert
+                // Expected exception 
             }
 
             [TestMethod]

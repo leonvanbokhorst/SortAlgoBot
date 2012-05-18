@@ -19,15 +19,17 @@ namespace SortAlgobotTests.SortRailTests
                 var sortRail = new SortRail();
 
                 // Act
-                int result = sortRail.GetTachoToPosition((BallPosition) 15);
+                sortRail.GetTachoToPosition((BallPosition) 15);
+
+                // Assert
+                // Expected exception thrown
             }
 
             [TestMethod]
             public void ShouldReturn0ForBallHomeByCurrentTacho0()
             {
                 // Arange
-                var sortRail = new SortRail();
-                sortRail.CurrentTacho = 0;
+                var sortRail = new SortRail {CurrentTacho = 0};
                 const int expected = 0;
 
                 // Act
@@ -41,8 +43,7 @@ namespace SortAlgobotTests.SortRailTests
             public void ShouldReturn2640ForBall6ByCurrentTacho0()
             {
                 // Arange
-                var sortRail = new SortRail();
-                sortRail.CurrentTacho = 0;
+                var sortRail = new SortRail {CurrentTacho = 0};
                 const int expected = 2640;
 
                 // Act
@@ -56,8 +57,7 @@ namespace SortAlgobotTests.SortRailTests
             public void ShouldReturn4950ForBallPivotByCurrentTacho0()
             {
                 // Arange
-                var sortRail = new SortRail();
-                sortRail.CurrentTacho = 0;
+                var sortRail = new SortRail {CurrentTacho = 0};
                 const int expected = 4950;
 
                 // Act
@@ -71,8 +71,7 @@ namespace SortAlgobotTests.SortRailTests
             public void ShouldReturn0ForBallPivotByCurrentTacho4950()
             {
                 // Arange
-                var sortRail = new SortRail();
-                sortRail.CurrentTacho = 4950;
+                var sortRail = new SortRail {CurrentTacho = 4950};
                 const int expected = 0;
 
                 // Act
@@ -86,8 +85,7 @@ namespace SortAlgobotTests.SortRailTests
             public void ShouldReturn0ForBallPivotByCurrentTacho2640()
             {
                 // Arange
-                var sortRail = new SortRail();
-                sortRail.CurrentTacho = 2640;
+                var sortRail = new SortRail {CurrentTacho = 2640};
                 const int expected = 0;
 
                 // Act
@@ -101,8 +99,7 @@ namespace SortAlgobotTests.SortRailTests
             public void ShouldReturnMin1000ForBallHomeByCurrentTacho1000()
             {
                 // Arange
-                var sortRail = new SortRail();
-                sortRail.CurrentTacho = 1000;
+                var sortRail = new SortRail {CurrentTacho = 1000};
                 const int expected = -1000;
 
                 // Act
@@ -116,8 +113,7 @@ namespace SortAlgobotTests.SortRailTests
             public void ShouldReturnMin1000ForBall6ByCurrentTacho3640()
             {
                 // Arange
-                var sortRail = new SortRail();
-                sortRail.CurrentTacho = 3640;
+                var sortRail = new SortRail {CurrentTacho = 3640};
                 const int expected = -1000;
 
                 // Act
@@ -131,8 +127,7 @@ namespace SortAlgobotTests.SortRailTests
             public void ShouldReturn1000ForBall6ByCurrentTacho1640()
             {
                 // Arange
-                var sortRail = new SortRail();
-                sortRail.CurrentTacho = 1640;
+                var sortRail = new SortRail {CurrentTacho = 1640};
                 const int expected = 1000;
 
                 // Act

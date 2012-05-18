@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Threading;
+using NKH.MindSqualls;
 using NKH.MindSqualls.MotorControl;
 
 namespace SortAlgoBot.Helpers
@@ -18,6 +19,9 @@ namespace SortAlgoBot.Helpers
             WaitForMotorToFinish(motor);
 
             Debug.WriteLine("Real tacho {0} degrees", motor.TachoCount);
+
+            if (motor.TachoCount == null)
+                throw new NxtException("Error getting tacho count from motor.");
 
             return motor.TachoCount.Value;
         }

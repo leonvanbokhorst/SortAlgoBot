@@ -55,7 +55,7 @@ namespace SortAlgoBot.Algorithms
 
         #endregion
 
-        private List<int> QuickSort(int leftIndex, int rightIndex)
+        private void QuickSort(int leftIndex, int rightIndex)
         {
             int leftPointer = leftIndex;
             int rightPointer = rightIndex;
@@ -100,8 +100,6 @@ namespace SortAlgoBot.Algorithms
             {
                 QuickSort(leftPointer, rightIndex);
             }
-
-            return _sortList;
         }
     }
 }

@@ -15,15 +15,15 @@ namespace SortAlgoBot.Commands
 
         public void Execute()
         {
-            BeepA();
+            BeepSomeWhat();
         }
 
         #endregion
 
-        private void BeepA()
+        private void BeepSomeWhat()
         {
             _robot.Brick.PlayTone(frequency: 480, duration: 25);
-            Thread.Sleep(50);
+            Thread.Sleep(millisecondsTimeout: 35);
         }
     }
 }
