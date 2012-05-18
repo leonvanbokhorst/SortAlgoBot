@@ -32,24 +32,6 @@ namespace SortAlgoBot.Helpers
             return (BallPosition) (leftIndex + 1);
         }
 
-        //private bool RobotGotoIndexPositionAndReadStoreColor(int index)
-        //{
-        //    // Ga naar leftindex 
-        //    BallPosition leftIndexColorPosition = GetColorReadPosition(index);
-        //    var c1 = new RobotMoveToPosition(_brick, _sortRail, leftIndexColorPosition);
-        //    c1.Execute();
-        //    // Lees Pivot kleur 
-        //    var c2 = new RobotReadColor(_brick);
-        //    c2.Execute();
-        //    // en sla op als waarde 0 is
-        //    if (_sortList[index] == 0)
-        //    {
-        //        _sortList[index] = c2.Result;
-        //    }
-
-        //    return true;
-        //}
-
         public static MotorDirection SetMotorDirection(int tacho)
         {
             MotorDirection motorDirection = MotorDirection.Forward;
@@ -71,13 +53,11 @@ namespace SortAlgoBot.Helpers
                     _runningTacho = motor.TachoCount.Value;
                 }
 
-                Debug.Write("-");
-                Thread.Sleep(1000); // now wait a second!
+                Thread.Sleep(200); // now wait half a second!
 
                 motor.Poll();
             } while (motor.TachoCount.HasValue
                      && motor.TachoCount.Value != _runningTacho);
-            Debug.WriteLine("");
         }
 
         private static sbyte GetSpeed(MotorDirection direction)

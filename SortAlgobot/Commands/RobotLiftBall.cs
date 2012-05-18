@@ -24,13 +24,13 @@ namespace SortAlgoBot.Commands
         private void LiftUp()
         {
             _robot.BallLift.Run(power: -10, tachoLimit: 25);
-            Thread.Sleep(1500);
+            Thread.Sleep(1200);
         }
 
         private void LiftDown()
         {
-            _robot.BallLift.Run(power: 10, tachoLimit: 25);
-            Thread.Sleep(500);
+            _robot.BallLift.Run(power: 4, tachoLimit: 25);
+            Thread.Sleep(200);
         }
     }
 }

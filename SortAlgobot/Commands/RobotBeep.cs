@@ -22,8 +22,8 @@ namespace SortAlgoBot.Commands
 
         private void BeepA()
         {
-            _robot.Brick.PlayTone(frequency: 440, duration: 500);
-            Thread.Sleep(500);
+            _robot.Brick.PlayTone(frequency: 480, duration: 25);
+            Thread.Sleep(50);
         }
     }
 }
