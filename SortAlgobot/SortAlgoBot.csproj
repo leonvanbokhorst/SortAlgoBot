@@ -46,7 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\IRoboSortAlgorithm.cs" />
     <Compile Include="Algorithms\RoboQuickSort.cs" />
+    <Compile Include="Common\SortAlgoEventHandler.cs" />
     <Compile Include="Commands\IRobotCommand.cs" />
     <Compile Include="Commands\IRobotValueCommand.cs" />
     <Compile Include="Commands\RobotBeep.cs" />

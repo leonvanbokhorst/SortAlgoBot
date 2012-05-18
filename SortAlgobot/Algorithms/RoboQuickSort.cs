@@ -1,28 +1,61 @@
 ﻿using System.Collections.Generic;
+using SortAlgoBot.Common;
 
 namespace SortAlgoBot.Algorithms
 {
-    public class RoboSortAlgorithm
+    public class RoboSortAlgorithm : IRoboSortAlgorithm
     {
-        //#region Delegates
-
-        #region Delegates
-
-        public delegate void SortAlgoEventHandler(int leftPointer, int rightPointer);
-
-        #endregion
-
-        //#endregion
         private readonly List<int> _sortList;
-        private readonly SortRail _sortRail;
 
         public RoboSortAlgorithm(List<int> unsortedList)
         {
             _sortList = unsortedList;
-            _sortRail = new SortRail();
         }
 
-        public List<int> QuickSort(int leftIndex, int rightIndex)
+        #region IRoboSortAlgorithm Members
+
+        public event SortAlgoEventHandler PivotPicked;
+        public event SortAlgoEventHandler Swap;
+        public event SortAlgoEventHandler Done;
+
+        public void OnDone(int leftPointer, int rightPointer)
+        {
+            SortAlgoEventHandler handler = Done;
+
+            if (handler != null)
+            {
+                handler(leftPointer, rightPointer);
+            }
+        }
+
+        public void OnSwap(int leftPointer, int rightpointer)
+        {
+            SortAlgoEventHandler handler = Swap;
+
+            if (handler != null)
+            {
+                handler(leftPointer, rightpointer);
+            }
+        }
+
+        public void OnPivotPicked(int leftPointer, int rightPointer)
+        {
+            SortAlgoEventHandler handler = PivotPicked;
+
+            if (handler != null)
+            {
+                handler(leftPointer, rightPointer);
+            }
+        }
+
+        public void Execute()
+        {
+            QuickSort(0, _sortList.Count);
+        }
+
+        #endregion
+
+        private List<int> QuickSort(int leftIndex, int rightIndex)
         {
             int leftPointer = leftIndex;
             int rightPointer = rightIndex;
@@ -69,40 +102,6 @@ namespace SortAlgoBot.Algorithms
             }
 
             return _sortList;
-        }
-
-        public event SortAlgoEventHandler PivotPicked;
-        public event SortAlgoEventHandler Swap;
-        public event SortAlgoEventHandler Done;
-
-        public void OnDone(int leftPointer, int rightPointer)
-        {
-            SortAlgoEventHandler handler = Done;
-
-            if (handler != null)
-            {
-                handler(leftPointer, rightPointer);
-            }
-        }
-
-        public void OnSwap(int leftPointer, int rightpointer)
-        {
-            SortAlgoEventHandler handler = Swap;
-
-            if (handler != null)
-            {
-                handler(leftPointer, rightpointer);
-            }
-        }
-
-        private void OnPivotPicked(int leftPointer, int rightPointer)
-        {
-            SortAlgoEventHandler handler = PivotPicked;
-
-            if (handler != null)
-            {
-                handler(leftPointer, rightPointer);
-            }
         }
     }
 }

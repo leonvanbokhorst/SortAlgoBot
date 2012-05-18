@@ -31,16 +31,17 @@ namespace SortAlgobotTests.NxtIntegrationTests
         {
             var scanColorSequence = new RobotScanAllColorsCommandSequence(_robot, _sortRail);
             scanColorSequence.Execute();
-            var algo = new RoboSortAlgorithm(_sortRail.SortList);
             
-            algo.PivotPicked += AlgoPivotPicked;
-            algo.Swap += AlgoSwap;
-            algo.Done += AlgoDone;
+            var sortAlgorithm = new RoboSortAlgorithm(_sortRail.SortList);
+            
+            sortAlgorithm.PivotPicked += AlgoPivotPicked;
+            sortAlgorithm.Swap += AlgoSwap;
+            sortAlgorithm.Done += AlgoDone;
 
-            algo.QuickSort(0, _sortRail.SortList.Count);
+            sortAlgorithm.Execute();
         }
 
-        void AlgoDone(int leftPointer, int rightPointer)
+        private void AlgoDone(int leftPointer, int rightPointer)
         {
             var goHomeCommand = new RobotMoveToPosition(_robot, _sortRail, BallPosition.Home);
             goHomeCommand.Execute();
@@ -61,59 +62,6 @@ namespace SortAlgobotTests.NxtIntegrationTests
         {
             var beepCommand = new RobotBeep(_robot);
             beepCommand.Execute();
-        }
-
-        [TestMethod]
-        public void ShouldReadColorBallOnPositionSix()
-        {
-            var sortRail = new SortRail();
-
-            var moveToColorReadSixCommand = new RobotMoveToPosition(_robot, sortRail, BallPosition.Six - 1);
-            moveToColorReadSixCommand.Execute();
-
-            var readColorCommand = new RobotReadColor(_robot);
-            readColorCommand.Execute();
-
-            var moveBackHomeCommand = new RobotMoveToPosition(_robot, sortRail, BallPosition.Home);
-            moveBackHomeCommand.Execute();
-        }
-
-        [TestMethod]
-        public void ShouldDeliverBallOnPositionSix()
-        {
-            var sortRail = new SortRail();
-
-            var moveToSixCommand = new RobotMoveToPosition(_robot, sortRail, BallPosition.Six);
-            moveToSixCommand.Execute();
-
-            var liftBallCommand = new RobotLiftBall(_robot);
-            liftBallCommand.Execute();
-
-            var moveBackHomeCommand = new RobotMoveToPosition(_robot, sortRail, BallPosition.Home);
-            moveBackHomeCommand.Execute();
-        }
-
-        [TestMethod]
-        public void ShouldLiftBallAndFallBack()
-        {
-            var command = new RobotLiftBall(_robot);
-            command.Execute();
-        }
-
-        [TestMethod]
-        public void ShouldDropBallAndTurnBack()
-        {
-            var command = new RobotDropBall(_robot);
-            command.Execute();
-        }
-
-        [TestMethod]
-        public void ShouldMoveTheRobotForwardToPos8()
-        {
-            var sortRail = new SortRail();
-
-            var commandEight = new RobotMoveToPosition(_robot, sortRail, BallPosition.Eight);
-            commandEight.Execute();
         }
     }
 }
