@@ -4,39 +4,40 @@ using NKH.MindSqualls;
 
 namespace SortAlgoBot.Commands
 {
-	public class RobotReadColor : IRobotValueCommand
-	{
-		private readonly SortRobot _robot;
+    public class RobotReadColor : IRobotValueCommand
+    {
+        private readonly SortRobot _robot;
 
-		public RobotReadColor(SortRobot robot)
-		{
-			_robot = robot;
-		}
-		#region IRobotValueCommand Members
+        public RobotReadColor(SortRobot robot)
+        {
+            _robot = robot;
+        }
 
-		public int Result { get; set; }
+        #region IRobotValueCommand Members
 
-		public void Execute()
-		{
-			if (_robot.ColorSensor != null)
-			{
-				_robot.ColorSensor.SetColorDetectorMode();
-				_robot.ColorSensor.Poll();
-				Nxt2Color? color = _robot.ColorSensor.Color;
+        public int Result { get; set; }
 
-				Thread.Sleep(500);
+        public void Execute()
+        {
+            if (_robot.ColorSensor != null)
+            {
+                _robot.ColorSensor.SetColorDetectorMode();
+                _robot.ColorSensor.Poll();
+                Nxt2Color? color = _robot.ColorSensor.Color;
 
-				if (color == null)
-				{
-					throw new NxtException("Color sensor error.");
-				}
+                Thread.Sleep(1000);
 
-				Result = (int) color.Value;
+                if (color == null)
+                {
+                    throw new NxtException("Color sensor error.");
+                }
 
-				Debug.WriteLine("Ball color is {0}", color.Value);
-			}
-		}
+                Result = (int) color.Value;
 
-		#endregion
-	}
+                Debug.WriteLine("Ball color is {0}", color.Value);
+            }
+        }
+
+        #endregion
+    }
 }

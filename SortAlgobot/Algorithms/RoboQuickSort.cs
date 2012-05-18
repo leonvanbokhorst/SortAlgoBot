@@ -2,94 +2,96 @@
 
 namespace SortAlgoBot.Algorithms
 {
-	public class RoboSortAlgorithm
-	{
-		//#region Delegates
-		#region Delegates
+    public class RoboSortAlgorithm
+    {
+        //#region Delegates
 
-		public delegate void SortAlgoEventHandler(int leftPointer, int rightPointer);
+        #region Delegates
 
-		#endregion
-		//#endregion
-		private readonly List<int> _sortList;
-		private readonly SortRail _sortRail;
+        public delegate void SortAlgoEventHandler(int leftPointer, int rightPointer);
 
-		public RoboSortAlgorithm(List<int> unsortedList)
-		{
-			_sortList = unsortedList;
-			_sortRail = new SortRail();
-		}
+        #endregion
 
-		public List<int> QuickSort(int leftIndex, int rightIndex)
-		{
-			int leftPointer = leftIndex;
-			int rightPointer = rightIndex;
-			int pivot = _sortList[leftIndex];
+        //#endregion
+        private readonly List<int> _sortList;
+        private readonly SortRail _sortRail;
 
-			OnPivotPicked(leftPointer, rightPointer);
+        public RoboSortAlgorithm(List<int> unsortedList)
+        {
+            _sortList = unsortedList;
+            _sortRail = new SortRail();
+        }
 
-			while (leftPointer <= rightPointer)
-			{
-				while (_sortList[leftPointer] < pivot)
-				{
-					leftPointer++;
-				}
+        public List<int> QuickSort(int leftIndex, int rightIndex)
+        {
+            int leftPointer = leftIndex;
+            int rightPointer = rightIndex;
+            int pivot = _sortList[leftIndex];
 
-				while (pivot < _sortList[rightPointer])
-				{
-					rightPointer--;
-				}
+            OnPivotPicked(leftPointer, rightPointer);
 
-				if (leftPointer <= rightPointer)
-				{
-					if (_sortList[leftPointer] != _sortList[rightPointer])
-					{
-						int swapValue = _sortList[leftPointer];
-						_sortList[leftPointer] = _sortList[rightPointer];
-						_sortList[rightPointer] = swapValue;
+            while (leftPointer <= rightPointer)
+            {
+                while (_sortList[leftPointer] < pivot)
+                {
+                    leftPointer++;
+                }
 
-						OnSwap(leftPointer, rightPointer);
-					}
+                while (pivot < _sortList[rightPointer])
+                {
+                    rightPointer--;
+                }
 
-					leftPointer++;
-					rightPointer--;
-				}
-			}
+                if (leftPointer <= rightPointer)
+                {
+                    if (_sortList[leftPointer] != _sortList[rightPointer])
+                    {
+                        int swapValue = _sortList[leftPointer];
+                        _sortList[leftPointer] = _sortList[rightPointer];
+                        _sortList[rightPointer] = swapValue;
 
-			if (leftIndex < rightPointer)
-			{
-				QuickSort(leftIndex, rightPointer);
-			}
+                        OnSwap(leftPointer, rightPointer);
+                    }
 
-			if (leftPointer < rightIndex)
-			{
-				QuickSort(leftPointer, rightIndex);
-			}
+                    leftPointer++;
+                    rightPointer--;
+                }
+            }
 
-			return _sortList;
-		}
+            if (leftIndex < rightPointer)
+            {
+                QuickSort(leftIndex, rightPointer);
+            }
 
-		public event SortAlgoEventHandler PivotPicked;
-		public event SortAlgoEventHandler Swap;
+            if (leftPointer < rightIndex)
+            {
+                QuickSort(leftPointer, rightIndex);
+            }
 
-		public void OnSwap(int leftPointer, int rightpointer)
-		{
-			SortAlgoEventHandler handler = Swap;
+            return _sortList;
+        }
 
-			if (handler != null)
-			{
-				handler(leftPointer, rightpointer);
-			}
-		}
+        public event SortAlgoEventHandler PivotPicked;
+        public event SortAlgoEventHandler Swap;
 
-		private void OnPivotPicked(int leftPointer, int rightPointer)
-		{
-			SortAlgoEventHandler handler = PivotPicked;
+        public void OnSwap(int leftPointer, int rightpointer)
+        {
+            SortAlgoEventHandler handler = Swap;
 
-			if (handler != null)
-			{
-				handler(leftPointer, rightPointer);
-			}
-		}
-	}
+            if (handler != null)
+            {
+                handler(leftPointer, rightpointer);
+            }
+        }
+
+        private void OnPivotPicked(int leftPointer, int rightPointer)
+        {
+            SortAlgoEventHandler handler = PivotPicked;
+
+            if (handler != null)
+            {
+                handler(leftPointer, rightPointer);
+            }
+        }
+    }
 }

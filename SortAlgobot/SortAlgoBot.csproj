@@ -54,6 +54,7 @@
     <Compile Include="Commands\RobotDropBall.cs" />
     <Compile Include="Commands\RobotReadColor.cs" />
     <Compile Include="Commands\RobotMoveToPosition.cs" />
+    <Compile Include="Commands\Sequences\RobotScanAllColorsCommandSequence.cs" />
     <Compile Include="Commands\Sequences\RobotSwapBallsCommandSequence.cs" />
     <Compile Include="Helpers\MotorDirection.cs" />
     <Compile Include="Helpers\MotorHelper.cs" />

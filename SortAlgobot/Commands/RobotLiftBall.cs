@@ -2,33 +2,35 @@ using System.Threading;
 
 namespace SortAlgoBot.Commands
 {
-	public class RobotLiftBall : IRobotCommand
-	{
-		private readonly SortRobot _robot;
+    public class RobotLiftBall : IRobotCommand
+    {
+        private readonly SortRobot _robot;
 
-		public RobotLiftBall(SortRobot robot)
-		{
-			_robot = robot;
-		}
-		#region IRobotCommand Members
+        public RobotLiftBall(SortRobot robot)
+        {
+            _robot = robot;
+        }
 
-		public void Execute()
-		{
-			LiftUp();
-			LiftDown();
-		}
+        #region IRobotCommand Members
 
-		#endregion
-		private void LiftUp()
-		{
-			_robot.BallLift.Run(power: -10, tachoLimit: 25);
-			Thread.Sleep(1500);
-		}
+        public void Execute()
+        {
+            LiftUp();
+            LiftDown();
+        }
 
-		private void LiftDown()
-		{
-			_robot.BallLift.Run(power: 10, tachoLimit: 25);
-			Thread.Sleep(500);
-		}
-	}
+        #endregion
+
+        private void LiftUp()
+        {
+            _robot.BallLift.Run(power: -10, tachoLimit: 25);
+            Thread.Sleep(1500);
+        }
+
+        private void LiftDown()
+        {
+            _robot.BallLift.Run(power: 10, tachoLimit: 25);
+            Thread.Sleep(500);
+        }
+    }
 }
