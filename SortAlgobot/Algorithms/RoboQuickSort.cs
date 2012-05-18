@@ -73,6 +73,17 @@ namespace SortAlgoBot.Algorithms
 
         public event SortAlgoEventHandler PivotPicked;
         public event SortAlgoEventHandler Swap;
+        public event SortAlgoEventHandler Done;
+
+        public void OnDone(int leftPointer, int rightPointer)
+        {
+            SortAlgoEventHandler handler = Done;
+
+            if (handler != null)
+            {
+                handler(leftPointer, rightPointer);
+            }
+        }
 
         public void OnSwap(int leftPointer, int rightpointer)
         {

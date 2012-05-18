@@ -32,10 +32,18 @@ namespace SortAlgobotTests.NxtIntegrationTests
             var scanColorSequence = new RobotScanAllColorsCommandSequence(_robot, _sortRail);
             scanColorSequence.Execute();
             var algo = new RoboSortAlgorithm(_sortRail.SortList);
+            
             algo.PivotPicked += AlgoPivotPicked;
             algo.Swap += AlgoSwap;
+            algo.Done += AlgoDone;
 
-            algo.QuickSort(0, 11);
+            algo.QuickSort(0, _sortRail.SortList.Count);
+        }
+
+        void AlgoDone(int leftPointer, int rightPointer)
+        {
+            var goHomeCommand = new RobotMoveToPosition(_robot, _sortRail, BallPosition.Home);
+            goHomeCommand.Execute();
         }
 
         private void AlgoSwap(int leftPointer, int rightPointer)
