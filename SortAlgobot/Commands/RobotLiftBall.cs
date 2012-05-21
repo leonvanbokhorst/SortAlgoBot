@@ -30,7 +30,7 @@ namespace SortAlgoBot.Commands
         private void LiftDown()
         {
             _robot.BallLift.Run(power: 4, tachoLimit: 25);
-            Thread.Sleep(200);
+            Thread.Sleep(500);
         }
     }
 }

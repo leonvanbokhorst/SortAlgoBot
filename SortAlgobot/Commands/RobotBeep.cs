@@ -23,7 +23,7 @@ namespace SortAlgoBot.Commands
         private void BeepSomeWhat()
         {
             _robot.Brick.PlayTone(frequency: 480, duration: 25);
-            Thread.Sleep(millisecondsTimeout: 35);
+            Thread.Sleep(millisecondsTimeout: 100);
         }
     }
 }

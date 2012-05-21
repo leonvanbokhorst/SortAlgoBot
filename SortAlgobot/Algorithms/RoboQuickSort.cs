@@ -50,7 +50,8 @@ namespace SortAlgoBot.Algorithms
 
         public void Execute()
         {
-            QuickSort(0, _sortList.Count);
+            QuickSort(0, _sortList.Count-1);
+            OnDone(0,0);
         }
 
         #endregion

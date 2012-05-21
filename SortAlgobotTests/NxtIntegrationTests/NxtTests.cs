@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SortAlgoBot;
 using SortAlgoBot.Algorithms;
 using SortAlgoBot.Commands;
@@ -31,6 +32,9 @@ namespace SortAlgobotTests.NxtIntegrationTests
         {
             var scanColorSequence = new RobotScanAllColorsCommandSequence(_robot, _sortRail);
             scanColorSequence.Execute();
+
+            // mock
+            //_sortRail.SortList = new List<int>{3,2,5,4,5,4,3,3,2,5,2,4};
 
             var sortAlgorithm = new RoboSortAlgorithm(_sortRail.SortList);
 

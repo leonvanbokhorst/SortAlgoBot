@@ -57,7 +57,7 @@ namespace SortAlgoBot.Helpers
                     _runningTacho = motor.TachoCount.Value;
                 }
 
-                Thread.Sleep(200); // now wait half a second!
+                Thread.Sleep(500); // now wait half a second!
 
                 motor.Poll();
             } while (motor.TachoCount.HasValue

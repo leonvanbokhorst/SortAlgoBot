@@ -26,13 +26,13 @@ namespace SortAlgoBot.Commands
         private void ExtendLinearActuator()
         {
             _robot.BallDropper.Run(power: 100, tachoLimit: 2100);
-            Thread.Sleep(4000);
+            Thread.Sleep(4200);
         }
 
         private void RetractLinearActuator()
         {
             _robot.BallDropper.Run(power: -100, tachoLimit: 2100);
-            Thread.Sleep(1100);
+            Thread.Sleep(1300);
         }
     }
 }

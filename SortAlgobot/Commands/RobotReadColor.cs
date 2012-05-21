@@ -25,7 +25,7 @@ namespace SortAlgoBot.Commands
                 _robot.ColorSensor.Poll();
                 Nxt2Color? color = _robot.ColorSensor.Color;
 
-                Thread.Sleep(300);
+                Thread.Sleep(500);
 
                 if (color == null)
                 {
